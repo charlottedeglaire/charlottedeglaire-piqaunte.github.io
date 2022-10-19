@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userCtrl = require("../controllers/user");
 const rateLimit = require("express-rate-limit");
-const apiLimiter = rateLimit({ // Limit login request to avoid brute force hack 
+const apiLimiter = rateLimit({ 
     windowMs: 1 * 60 * 1000,
     max: 10,
 });
