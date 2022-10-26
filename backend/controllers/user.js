@@ -4,14 +4,17 @@ const User = require("../models/User");
 require("dotenv").config();
 const TOKEN = process.env.TOKEN;
 
+// Password contain at least 6 character, 1 letter uppercase, 1 letter lowercase , 1 number ?
 isValidPassword = (password) => {
     return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/.test(password);
 };
+// Email format validation
 isValidEmail = (email) => {
     return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
         email
     );
 };
+// Email mask ( user1@gmail.com become uXXX1@gmail.com)
 maskEmail = (email) => {
     let str = email;
     str = str.split("");
@@ -25,6 +28,7 @@ maskEmail = (email) => {
     let maskedEmail = finalArr.join("");
     return maskedEmail;
 };
+// Signup
 exports.signup = (req, res, next) => {
     if (isValidPassword(req.body.password) && isValidEmail(req.body.email)) {
         bcrypt
@@ -48,6 +52,7 @@ exports.signup = (req, res, next) => {
         });
     }
 };
+// Login
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then((user) => {
