@@ -14,20 +14,6 @@ isValidEmail = (email) => {
         email
     );
 };
-// Email mask ( user1@gmail.com become uXXX1@gmail.com)
-maskEmail = (email) => {
-    let str = email;
-    str = str.split("");
-    let finalArr = [];
-    let len = str.indexOf("@");
-    str.forEach((item, pos) => {
-        pos >= 1 && pos <= len - 2
-            ? finalArr.push("X")
-            : finalArr.push(str[pos]);
-    });
-    let maskedEmail = finalArr.join("");
-    return maskedEmail;
-};
 // Signup
 exports.signup = (req, res, next) => {
     if (isValidPassword(req.body.password) && isValidEmail(req.body.email)) {
