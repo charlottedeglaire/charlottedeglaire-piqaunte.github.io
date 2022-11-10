@@ -23,7 +23,6 @@ exports.signup = (req, res, next) => {
                 const user = new User({
                     email: req.body.email,
                     password: hash,
-                    maskedEmail: maskEmail(req.body.email),
                 });
                 user.save()
                     .then(() =>
